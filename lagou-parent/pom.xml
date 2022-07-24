@@ -12,6 +12,7 @@
         <module>lagou-service-product</module>
         <module>lagou-service-page</module>
         <module>lagou-cloud-eureka</module>
+        <module>lagou-cloud-eureka-9201</module>
     </modules>
 
     <!--父工程打包方式-->
