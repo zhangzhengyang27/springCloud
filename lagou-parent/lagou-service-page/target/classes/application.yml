@@ -1,0 +1,11 @@
+server:
+  port: 9100   # 后期该微服务多实例，端口从9100递增（10个以内）
+Spring:
+  application:
+    name: lagou-service-page
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lagou?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root1234
+

@@ -1,0 +1,20 @@
+package com.lagou.page;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+public class PageApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(PageApplication.class, args);
+    }
+
+    //像容器中注入一个RestTemplate，封装了HttpClient
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
