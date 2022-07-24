@@ -10,6 +10,7 @@
     <modules>
         <module>lagou-service-common</module>
         <module>lagou-service-product</module>
+        <module>lagou-service-product-9001</module>
         <module>lagou-service-page</module>
         <module>lagou-cloud-eureka</module>
         <module>lagou-cloud-eureka-9201</module>

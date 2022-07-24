@@ -1,24 +1,20 @@
 server:
-  port: 9100   # 后期该微服务多实例，端口从9100递增（10个以内）
-Spring:
+  port: 9001    #微服务的集群环境中，通常会为每一个微服务叠加。
+spring:
   application:
-    name: lagou-service-page
+    name: lagou-service-product  # 项目的名称
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lagou?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root1234
+
 eureka:
   client:
     serviceUrl: # eureka server的路径
       # defaultZone: http://localhost:9200/eureka/
       defaultZone: http://LagouCloudEurekaServerA:9200/eureka,http://LagouCloudEurekaServerB:9201/eureka
   instance:
-    #使用ip注册，否则会使用主机名注册了（此处考虑到对老版本的兼容，新版本经过实验都是ip）
+      #使用ip注册，否则会使用主机名注册了（此处考虑到对老版本的兼容，新版本经过实验都是ip）
     prefer-ip-address: true #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address，早期版本是ipAddress
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:1.0-SNAPSHOT
-    metadata-map:
-      ip: 121.40.77.89
-      port: 10000
-      user: zhangzhengyang
-      pwd: 123456

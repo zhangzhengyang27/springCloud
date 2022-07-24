@@ -37,11 +37,20 @@ public class PageController {
         //3.根据实例信息拼接IP地址
         String host = instance.getHost();
         int port = instance.getPort();
-        String url = "http://" + host + ":" + port + "/product/query/" + id;
+        // String url = "http://" + host + ":" + port + "/product/query/" + id;
+
+        String url = "http://lagou-service-product/product/query/"+ id;
 
         //4.调用
         Products products = restTemplate.getForObject(url, Products.class);
         System.out.println("从lagou-service-product获得product对象:" + products);
         return products;
+    }
+
+    @GetMapping("/loadProductServicePort")
+    public String getProductServerPort() {
+        String url = "http://lagou-service-product/service/port";
+        String result =restTemplate.getForObject(url, String.class);
+        return result;
     }
 }

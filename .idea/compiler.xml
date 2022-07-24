@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lagou-service-common" />
         <module name="lagou-service-page" />
+        <module name="lagou-service-product-9001" />
         <module name="lagou-service-product" />
         <module name="lagou-cloud-eureka" />
         <module name="lagou-cloud-eureka-9201" />
@@ -19,10 +20,11 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="lagou-cloud-eureka" options="-parameters" />
       <module name="lagou-cloud-eureka-9201" options="-parameters" />
-      <module name="lagou-parent" options="" />
+      <module name="lagou-parent" options="-parameters" />
       <module name="lagou-service-common" options="-parameters" />
       <module name="lagou-service-page" options="-parameters" />
       <module name="lagou-service-product" options="-parameters" />
+      <module name="lagou-service-product-9001" options="-parameters" />
     </option>
   </component>
 </project>
