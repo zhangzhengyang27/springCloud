@@ -10,11 +10,13 @@
         <module name="lagou-service-common" />
         <module name="lagou-service-page" />
         <module name="lagou-service-product" />
+        <module name="lagou-cloud-eureka" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lagou-cloud-eureka" options="-parameters" />
       <module name="lagou-parent" options="-parameters" />
       <module name="lagou-service-common" options="-parameters" />
       <module name="lagou-service-page" options="-parameters" />
