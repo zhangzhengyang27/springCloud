@@ -16,10 +16,11 @@
             <artifactId>lagou-service-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--Eureka client-->
+
+        <!--Spring cloud alibaba nacos客户端的依赖-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
         <!--熔断器Hystrix-->
@@ -27,22 +28,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
-        <!--引入openfeign，远程调用组件-->
+
+        <!--引入openFeign远程调用组件-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--取config server的配置信息-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
-        </dependency>
 
-        <!--Config Server服务端和客户端添加消息总线支持-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
