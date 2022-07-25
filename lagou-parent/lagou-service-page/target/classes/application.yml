@@ -68,3 +68,17 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+#开启Feign对熔断器支持
+feign:
+  hystrix:
+    enabled: true
+  #开启请求和响应的压缩设置，默认是不开启的
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json  #默认值
+      min-request-size: 2048
+    response:
+      enabled: true
