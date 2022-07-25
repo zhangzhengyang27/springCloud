@@ -12,3 +12,69 @@ Spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 #nacos server 地址
+      config:
+        server-addr: 127.0.0.1:8848
+        # 命名空间、分组都是默认的,可以不指定
+        # namespace: 0e10ff51-afcb-405b-a191-0a8fd04f48e8 #命名空间的ID
+        # group: DEFAULT_GROUP #如果使用的默认分组,可以不设置
+        file-extension: yaml
+
+
+#针对的被调用方微服务名称,不加就是全局生效
+lagou-service-product:
+  ribbon:
+    #请求连接超时时间
+    ConnectTimeout: 2000
+    #请求处理超时时间
+    ReadTimeout: 15000
+    #对所有操作都进行重试
+    OkToRetryOnAllOperations: true
+    ####根据如上配置，当访问到故障请求的时候，它会再尝试访问一次当前实例（次数由MaxAutoRetries配置），
+    ####如果不行，就换一个实例进行访问，如果还不行，再换一次实例访问（更换次数由MaxAutoRetriesNextServer配置），
+    ####如果依然不行，返回失败信息。
+    MaxAutoRetries: 0 #对当前选中实例重试次数，不包括第一次调用
+    MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #负载策略调整
+
+# 配置熔断策略：
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        # 强制打开熔断器，如果该属性设置为true，强制断路器进入打开状态，将会拒绝所有的请求。 默认false关闭的
+        forceOpen: false
+        # 触发熔断错误比例阈值，默认值50%
+        errorThresholdPercentage: 50
+        # 熔断后休眠时长，默认值5秒
+        sleepWindowInMilliseconds: 3000
+        # 熔断触发最小请求次数，默认值是20
+        requestVolumeThreshold: 2
+      execution:
+        isolation:
+          thread:
+            # 熔断超时设置，默认为1秒
+            timeoutInMilliseconds: 2000
+
+# springboot中暴露健康检查等断点接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 暴露健康接口的细节
+  endpoint:
+    health:
+      show-details: always
+
+#开启Feign对熔断器支持
+feign:
+  hystrix:
+    enabled: true
+  #开启请求和响应的压缩设置，默认是不开启的
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json  #默认值
+      min-request-size: 2048
+    response:
+      enabled: true
