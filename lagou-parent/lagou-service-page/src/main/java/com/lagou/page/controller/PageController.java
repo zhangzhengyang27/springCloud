@@ -1,6 +1,8 @@
 package com.lagou.page.controller;
 
 import com.lagou.common.pojo.Products;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -39,7 +41,7 @@ public class PageController {
         int port = instance.getPort();
         // String url = "http://" + host + ":" + port + "/product/query/" + id;
 
-        String url = "http://lagou-service-product/product/query/"+ id;
+        String url = "http://lagou-service-product/product/query/" + id;
 
         //4.调用
         Products products = restTemplate.getForObject(url, Products.class);
@@ -50,7 +52,29 @@ public class PageController {
     @GetMapping("/loadProductServicePort")
     public String getProductServerPort() {
         String url = "http://lagou-service-product/service/port";
-        String result =restTemplate.getForObject(url, String.class);
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
+    }
+
+    @GetMapping("/loadProductServicePort2")
+    // 使用@HystrixCommand注解进行熔断控制,针对熔断处理,Hystrix默认维护一个线程池，默认大小为10。
+    @HystrixCommand(
+            // 线程池标识，要保持唯一，不唯一的话就共用了
+            threadPoolKey = "getProductServerPort2",
+            // 线程池细节属性配置
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "1"),   // 线程数
+                    @HystrixProperty(name = "maxQueueSize", value = "20") // 等待队列长度
+            },
+            // commandProperties熔断的一些细节属性配置
+            commandProperties = {
+                    // 每一个属性都是一个HystrixProperty，默认1秒
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
+            }
+    )
+    public String getProductServerPort2() {
+        String url = "http://lagou-service-product/service/port";
+        String result = restTemplate.getForObject(url, String.class);
         return result;
     }
 }
