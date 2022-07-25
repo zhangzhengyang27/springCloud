@@ -8,6 +8,18 @@ Spring:
     url: jdbc:mysql://localhost:3306/lagou?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root1234
+  cloud:
+    config:
+      #config客户端配置,和ConfigServer通信，并告知ConfigServer希望获取的配置信息在哪个文件中
+      name: application
+      profile: dev #后缀名称
+      label: master #分支名称
+      uri: http://localhost:9400 #ConfigServer配置中心地址
+  rabbitmq:
+    host: 121.40.77.89
+    port: 5672
+    username: zhangzhengyang
+    password: 123456
 eureka:
   client:
     serviceUrl: # eureka server的路径
@@ -20,7 +32,7 @@ eureka:
     metadata-map:
       ip: 121.40.77.89
       port: 10000
-      user: zhangzhengyang
+      user: zhangzhengyang(瞎写的数据)
       pwd: 123456
 
 #针对的被调用方微服务名称,不加就是全局生效

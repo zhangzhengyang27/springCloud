@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/lagou-parent/pom.xml" />
         <option value="$PROJECT_DIR$/lagou-parent/lagou-cloud-eureka9201/pom.xml" />
+        <option value="$PROJECT_DIR$/lagou-parent/lagou-cloud-gateway/pom.xml" />
       </list>
     </option>
   </component>
