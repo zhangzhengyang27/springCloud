@@ -77,4 +77,43 @@ public class PageController {
         String result = restTemplate.getForObject(url, String.class);
         return result;
     }
+
+    /**
+     * 服务降级演示：是在服务熔断之后的兜底操作
+     */
+
+    @HystrixCommand(
+            //超时时间的设置
+            commandProperties = {
+                    //设置请求的超时时间，一旦请求超过此时间那么都按照超时处理，默认超时时间是1S
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+                    //统计窗口时间的设置
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "8000"),
+                    //统计窗口内的最小请求数
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "2"),
+                    //统计窗口内错误请求阈值的设置  50%
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "50"),
+                    //自我修复的活动窗口时间
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "3000")
+
+            },//设置回退方法
+            fallbackMethod = "getProductServerPortFallBack"
+    )
+    @GetMapping("/loadProductServicePort3")
+    public String getProductServerPort3() {
+        String url = "http://lagou-service-product/service/port";
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
+    }
+
+    /**
+     * 定义回退方法，当请求出发熔断后执行，补救措施
+     * 注意：
+     * 1.方法形参和原方法保持一致
+     * 2.方法的返回值与原方法保持一致
+     */
+    public String getProductServerPortFallBack(){
+        // 返回兜底数据
+        return "-1";
+    }
 }
