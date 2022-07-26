@@ -18,6 +18,16 @@ Spring:
         # namespace: 0e10ff51-afcb-405b-a191-0a8fd04f48e8 #命名空间的ID
         # group: DEFAULT_GROUP #如果使用的默认分组,可以不设置
         file-extension: yaml
+        #开启扩展dataId的动态刷新
+        ext-config[0]:
+          data-id: pagea.yaml
+          group: DEFAULT_GROUP
+          refresh: true #开启扩展dataId的动态刷新
+        #开启扩展dataId的动态刷新
+        ext-config[1]:
+          data-id: pageb.yaml
+          group: DEFAULT_GROUP
+          refresh: true #开启扩展dataId的动态刷新
 
 
 #针对的被调用方微服务名称,不加就是全局生效
