@@ -12,6 +12,7 @@
         <module>lagou-service-product</module>
         <module>lagou-service-product-9001</module>
         <module>lagou-service-page</module>
+        <module>lagou-service-page-9101</module>
         <module>lagou-cloud-eureka</module>
         <module>lagou-cloud-eureka-9201</module>
         <module>lagou-cloud-config</module>
